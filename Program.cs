@@ -29,6 +29,11 @@ foreach (var line in lines)
         // get the action type and file path
         var changeType = line[0];
         var filePath = line[2..].TrimStart();
+        // replace any commas or double quotes in the file path
+        filePath = filePath.Replace(",", " ");
+        filePath = filePath.Replace("\"", "'");
+        // wrap the file path in double quotes
+        filePath = $"\"{filePath}\"";
 
         // add the line to the list
         commitLines.Add($"{commitHash},{changeType},{filePath}");
